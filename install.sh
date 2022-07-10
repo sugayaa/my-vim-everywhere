@@ -86,5 +86,6 @@ EOF
 # alias -s vim=nvim
 alias vim=nvim
 echo "alias vim=nvim" >> ~/.bashrc
+echo "alias vim=nvim" >> ~/.zshrc
 vim -c ":PlugInstall"
 
