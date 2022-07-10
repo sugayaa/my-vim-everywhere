@@ -4,7 +4,8 @@ set -x
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
-cat << EOF >> .config/nvim/init.vim
+mkdir -p ~/.config/nvim
+cat << EOF >> ~/.config/nvim/init.vim
 call plug#begin()
 Plug 'junegunn/vim-easy-align'
 Plug 'itchyny/lightline.vim'
@@ -82,6 +83,8 @@ set cindent
 set pastetoggle=<F5>
 EOF
 
-alias -s vim=nvim
+# alias -s vim=nvim
+alias vim=nvim
+echo "alias vim=nvim" >> ~/.bashrc
 vim -c ":PlugInstall"
 
