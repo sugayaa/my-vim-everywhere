@@ -43,7 +43,7 @@ set background=dark
 
 nmap gd <Plug>(coc-definition)
 nmap gr <Plug>(coc-references)
-nnoremap <C-p> :GFiles<CR>
+nnoremap <C-p> :FZF<CR>
 
 set relativenumber number
 "saddistic mode
