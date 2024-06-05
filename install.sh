@@ -20,6 +20,7 @@ EOF
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
 echo > /home/$USER/.config/nvim/lua/scripts/packer.lua << EOF
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
@@ -64,10 +65,9 @@ return require('packer').startup(function(use)
     {'rafamadriz/friendly-snippets'},
   }
 }
-
 end)
 EOF
-vim +PackerSync
+nvim +PackerSync
 
 echo > /home/$USER/.config/nvim/lua/scripts/remap.lua << EOF
 vim.g.mapleader = " "
