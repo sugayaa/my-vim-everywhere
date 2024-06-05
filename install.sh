@@ -1,20 +1,21 @@
 #!/bin/bash
 
-mkdir -p /home/sugaya/.config/nvim/lua/scripts/
+mkdir -p /home/$USER/.config/nvim/lua/scripts/
+mkdir -p /home/$USER/.config/nvim/after/plugin/
 
-touch /home/sugaya/.config/nvim/init.lua
-touch /home/sugaya/.config/nvim/lua/scripts/init.lua
+touch /home/$USER/.config/nvim/init.lua
+touch /home/$USER/.config/nvim/lua/scripts/init.lua
 
-echo 'require("scripts")' >> /home/sugaya/.config/nvim/init.lua
+echo 'require("scripts")' >> /home/$USER/.config/nvim/init.lua
 
-echo > /home/sugaya/.config/nvim/lua/scripts/init.lua << EOF
+echo > /home/$USER/.config/nvim/lua/scripts/init.lua << EOF
 require("scripts.remap")
 require("scripts.set")
 EOF
 
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-echo > /home/sugaya/.config/nvim/lua/scripts/packer.lua << EOF
+echo > /home/$USER/.config/nvim/lua/scripts/packer.lua << EOF
 -- This file can be loaded by calling `lua require('plugins')` from your init.vim
 
 -- Only required if you have packer configured as `opt`
@@ -63,9 +64,79 @@ end)
 EOF
 vim +PackerSync
 
+echo > /home/$USER/.config/nvim/lua/scripts/remap.lua << EOF
+vim.g.mapleader = " "
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+vim.keymap.set("x", "<leader>p", "\"_dP")
+
+vim.keymap.set("n", "<leader>y", "\"+y")
+vim.keymap.set("v", "<leader>y", "\"+y")
+vim.keymap.set("n", "<leader>Y", "\"+Y")
+
+vim.keymap.set("n", "<leader>d", "\"_d")
+vim.keymap.set("v", "<leader>d", "\"_d")
+
+vim.keymap.set("n", "Q", "<nop>")
+-- tmux users
+-- vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<leader>f", function()
+    vim.lsp.buf.format()
+end)
+
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
+EOF
+
+
+echo > /home/$USER/.config/nvim/lua/scripts/set.lua << EOF
+vim.opt.nu = true
+vim.opt.relativenumber = true
+
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.smartindent = true
+
+vim.opt.wrap = false
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
+
+vim.opt.updatetime = 50
+
+vim.opt.colorcolumn = "80"
+EOF
+
 # configs
-mkdir -p /home/sugaya/.config/nvim/after/plugin/
-echo > /home/sugaya/.config/nvim/after/plugin/telescope.lua << EOF
+echo > /home/$USER/.config/nvim/after/plugin/telescope.lua << EOF
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -74,7 +145,7 @@ vim.keymap.set('n', '<leader>ps', function()
 end)
 EOF
 
-cat > /home/sugaya/.config/nvim/after/plugin/treesitter.lua << EOF
+cat > /home/$USER/.config/nvim/after/plugin/treesitter.lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "python", "go", "bash", "java" },
@@ -94,7 +165,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 
-echo > /home/sugaya/.config/nvim/after/plugin/harpoon.lua << EOF
+echo > /home/$USER/.config/nvim/after/plugin/harpoon.lua << EOF
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
@@ -107,15 +178,15 @@ vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
 EOF
 
-echo > /home/sugaya/.config/nvim/after/plugin/undotree.lua << EOF
+echo > /home/$USER/.config/nvim/after/plugin/undotree.lua << EOF
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 EOF
 
-echo > /home/sugaya/.config/nvim/after/plugin/fugitive.lua << EOF
+echo > /home/$USER/.config/nvim/after/plugin/fugitive.lua << EOF
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 EOF
 
-echo > /home/sugaya/.config/nvim/after/plugin/lsp.lua << EOF
+echo > /home/$USER/.config/nvim/after/plugin/lsp.lua << EOF
 -- local lsp = require('lsp-zero')
 --
 -- lsp.preset('recommended')
@@ -203,8 +274,6 @@ cmp.setup({
 })
 EOF
 
-# TODO: stopped at writing set.lua
-#
 # if not on arch, install nvim from source
 # install ripgrep
 sudo pacman -S ripgrep
