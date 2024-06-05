@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ -d /home/$USER/.config/nvim ]; then
+    echo "Directory .config/nvim exists, do you wanna backup first?"
+    exit 1
+fi
+
 mkdir -p /home/$USER/.config/nvim/lua/scripts/
 mkdir -p /home/$USER/.config/nvim/after/plugin/
 
