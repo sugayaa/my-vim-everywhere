@@ -1,8 +1,9 @@
 #!/bin/bash
+set -e
 
 if [ -d /home/$USER/.config/nvim ]; then
     echo "Directory .config/nvim exists, do you wanna backup first?"
-    exit 1
+    exit
 fi
 
 mkdir -p /home/$USER/.config/nvim/lua/scripts/
@@ -13,7 +14,7 @@ touch /home/$USER/.config/nvim/lua/scripts/init.lua
 
 echo 'require("scripts")' >> /home/$USER/.config/nvim/init.lua
 
-echo > /home/$USER/.config/nvim/lua/scripts/init.lua << EOF
+cat > /home/$USER/.config/nvim/lua/scripts/init.lua << EOF
 require("scripts.remap")
 require("scripts.set")
 EOF
@@ -21,10 +22,10 @@ EOF
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-echo > /home/$USER/.config/nvim/lua/scripts/packer.lua << EOF
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+cat > /home/$USER/.config/nvim/lua/scripts/packer.lua << EOF
+-- This file can be loaded by calling \`lua require('plugins')\` from your init.vim
 
--- Only required if you have packer configured as `opt`
+-- Only required if you have packer configured as \`opt\`
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
@@ -67,29 +68,29 @@ return require('packer').startup(function(use)
 }
 end)
 EOF
-nvim +PackerSync
+nvim --cmd "so /home/$USER/.config/nvim/lua/scripts/packer.lua" +PackerSync
 
-echo > /home/$USER/.config/nvim/lua/scripts/remap.lua << EOF
+cat > /home/$USER/.config/nvim/lua/scripts/remap.lua << EOF
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "J", "mzJ`z")
+vim.keymap.set("n", "J", "mzJ\`z")
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("x", "<leader>p", "\"_dP")
+vim.keymap.set("x", "<leader>p", "\\"_dP")
 
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+vim.keymap.set("n", "<leader>y", "\\"+y")
+vim.keymap.set("v", "<leader>y", "\\"+y")
+vim.keymap.set("n", "<leader>Y", "\\"+Y")
 
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", "\\"_d")
+vim.keymap.set("v", "<leader>d", "\\"_d")
 
 vim.keymap.set("n", "Q", "<nop>")
 -- tmux users
@@ -103,12 +104,12 @@ vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("n", "<leader>s", ":%s/\\\\<<C-r><C-w>\\\\>/<C-r><C-w>/gI<Left><Left><Left>")
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 EOF
 
 
-echo > /home/$USER/.config/nvim/lua/scripts/set.lua << EOF
+cat > "/home/$USER/.config/nvim/lua/scripts/set.lua"  << EOF
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -141,7 +142,7 @@ vim.opt.colorcolumn = "80"
 EOF
 
 # configs
-echo > /home/$USER/.config/nvim/after/plugin/telescope.lua << EOF
+cat > /home/$USER/.config/nvim/after/plugin/telescope.lua << EOF
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -155,11 +156,11 @@ require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "python", "go", "bash", "java" },
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
+  -- Install parsers synchronously (only applied to \`ensure_installed\`)
   sync_install = false,
 
   -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  -- Recommendation: set to false if you don't have \`tree-sitter\` CLI installed locally
   auto_install = true,
 
   highlight = {
@@ -170,7 +171,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 
-echo > /home/$USER/.config/nvim/after/plugin/harpoon.lua << EOF
+cat > /home/$USER/.config/nvim/after/plugin/harpoon.lua << EOF
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
@@ -183,15 +184,15 @@ vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
 EOF
 
-echo > /home/$USER/.config/nvim/after/plugin/undotree.lua << EOF
+cat > /home/$USER/.config/nvim/after/plugin/undotree.lua << EOF
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 EOF
 
-echo > /home/$USER/.config/nvim/after/plugin/fugitive.lua << EOF
+cat > /home/$USER/.config/nvim/after/plugin/fugitive.lua << EOF
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 EOF
 
-echo > /home/$USER/.config/nvim/after/plugin/lsp.lua << EOF
+cat > /home/$USER/.config/nvim/after/plugin/lsp.lua << EOF
 -- local lsp = require('lsp-zero')
 --
 -- lsp.preset('recommended')
@@ -281,4 +282,5 @@ EOF
 
 # if not on arch, install nvim from source
 # install ripgrep
-sudo pacman -S ripgrep
+# sudo pacman -S ripgrep
+sudo apt-get install ripgrep
