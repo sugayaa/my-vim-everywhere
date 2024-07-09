@@ -6,6 +6,11 @@ if [ -d /home/$USER/.config/nvim ]; then
     exit
 fi
 
+if [ -d /home/$USER/.local/share/nvim/site/pack/ ]; then
+    echo "Directory .local/share/nvim/site/pack/ exists, do you wanna backup first?"
+    exit
+fi
+
 mkdir -p /home/$USER/.config/nvim/lua/scripts/
 mkdir -p /home/$USER/.config/nvim/after/plugin/
 
