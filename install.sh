@@ -5,7 +5,8 @@ if [ $HOME == "" ]; then
     echo "\$HOME not set in environment"
 fi
 
-
+pacman -Sy
+pacman -S gcc ripgrep unzip go python
 
 if [ -d $HOME/.config/nvim ]; then
     echo "Directory .config/nvim exists, do you wanna backup first?"
@@ -293,5 +294,4 @@ EOF
 
 # if not on arch, install nvim from source
 # install ripgrep
-# sudo pacman -S ripgrep
-sudo apt-get install ripgrep
+# sudo apt-get install ripgrep
