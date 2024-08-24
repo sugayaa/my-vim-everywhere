@@ -1,20 +1,31 @@
 #!/bin/bash
 set -e
 
-if [ -d /home/$USER/.config/nvim ]; then
+if [ $HOME == "" ]; then
+    echo "\$HOME not set in environment"
+fi
+
+
+
+if [ -d $HOME/.config/nvim ]; then
     echo "Directory .config/nvim exists, do you wanna backup first?"
     exit
 fi
 
-mkdir -p /home/$USER/.config/nvim/lua/scripts/
-mkdir -p /home/$USER/.config/nvim/after/plugin/
+if [ -d $HOME/.local/share/nvim/site/pack/ ]; then
+    echo "Directory .local/share/nvim/site/pack/ exists, do you wanna backup first?"
+    exit
+fi
 
-touch /home/$USER/.config/nvim/init.lua
-touch /home/$USER/.config/nvim/lua/scripts/init.lua
+mkdir -p $HOME/.config/nvim/lua/scripts/
+mkdir -p $HOME/.config/nvim/after/plugin/
 
-echo 'require("scripts")' >> /home/$USER/.config/nvim/init.lua
+touch $HOME/.config/nvim/init.lua
+touch $HOME/.config/nvim/lua/scripts/init.lua
 
-cat > /home/$USER/.config/nvim/lua/scripts/init.lua << EOF
+echo 'require("scripts")' >> $HOME/.config/nvim/init.lua
+
+cat > $HOME/.config/nvim/lua/scripts/init.lua << EOF
 require("scripts.remap")
 require("scripts.set")
 EOF
@@ -22,7 +33,7 @@ EOF
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-cat > /home/$USER/.config/nvim/lua/scripts/packer.lua << EOF
+cat > $HOME/.config/nvim/lua/scripts/packer.lua << EOF
 -- This file can be loaded by calling \`lua require('plugins')\` from your init.vim
 
 -- Only required if you have packer configured as \`opt\`
@@ -68,9 +79,9 @@ return require('packer').startup(function(use)
 }
 end)
 EOF
-nvim --cmd "so /home/$USER/.config/nvim/lua/scripts/packer.lua" +PackerSync
+nvim --cmd "so $HOME/.config/nvim/lua/scripts/packer.lua" +PackerSync
 
-cat > /home/$USER/.config/nvim/lua/scripts/remap.lua << EOF
+cat > $HOME/.config/nvim/lua/scripts/remap.lua << EOF
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
@@ -109,7 +120,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 EOF
 
 
-cat > "/home/$USER/.config/nvim/lua/scripts/set.lua"  << EOF
+cat > "$HOME/.config/nvim/lua/scripts/set.lua"  << EOF
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -142,7 +153,7 @@ vim.opt.colorcolumn = "80"
 EOF
 
 # configs
-cat > /home/$USER/.config/nvim/after/plugin/telescope.lua << EOF
+cat > $HOME/.config/nvim/after/plugin/telescope.lua << EOF
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
@@ -151,7 +162,7 @@ vim.keymap.set('n', '<leader>ps', function()
 end)
 EOF
 
-cat > /home/$USER/.config/nvim/after/plugin/treesitter.lua << EOF
+cat > $HOME/.config/nvim/after/plugin/treesitter.lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "rust", "python", "go", "bash", "java" },
@@ -171,7 +182,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 
-cat > /home/$USER/.config/nvim/after/plugin/harpoon.lua << EOF
+cat > $HOME/.config/nvim/after/plugin/harpoon.lua << EOF
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 
@@ -184,15 +195,15 @@ vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
 vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
 EOF
 
-cat > /home/$USER/.config/nvim/after/plugin/undotree.lua << EOF
+cat > $HOME/.config/nvim/after/plugin/undotree.lua << EOF
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
 EOF
 
-cat > /home/$USER/.config/nvim/after/plugin/fugitive.lua << EOF
+cat > $HOME/.config/nvim/after/plugin/fugitive.lua << EOF
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
 EOF
 
-cat > /home/$USER/.config/nvim/after/plugin/lsp.lua << EOF
+cat > $HOME/.config/nvim/after/plugin/lsp.lua << EOF
 -- local lsp = require('lsp-zero')
 --
 -- lsp.preset('recommended')
