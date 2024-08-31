@@ -27,12 +27,11 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 cp .config/nvim/lua/scripts/packer.lua $HOME/.config/nvim/lua/scripts/packer.lua 
-
+cp .config/nvim/lua/scripts/remap.lua $HOME/.config/nvim/lua/scripts/remap.lua 
+cp .config/nvim/lua/scripts/set.lua $HOME/.config/nvim/lua/scripts/set.lua 
 
 nvim --cmd "so $HOME/.config/nvim/lua/scripts/packer.lua" +PackerSync
 
-cp .config/nvim/lua/scripts/remap.lua $HOME/.config/nvim/lua/scripts/remap.lua 
-cp .config/nvim/lua/scripts/set.lua $HOME/.config/nvim/lua/scripts/set.lua 
 
 # configs
 cp .config/nvim/after/plugin/telescope.lua  $HOME/.config/nvim/after/plugin/telescope.lua 
