@@ -36,6 +36,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 
 
 vim.keymap.set("n", "<leader>w", "<cmd>:w<CR>", {silent = true})
+vim.keymap.set("n", "<leader>q", "<cmd>:q<CR>")
 vim.keymap.set("n", "H", "^", {silent = true})
 vim.keymap.set("n", "L", "$", {silent = true})
 
@@ -43,4 +44,9 @@ vim.keymap.set({"n", "x", "o"}, "<M-h>", "<cmd>bp<cr>")
 vim.keymap.set({"n", "x", "o"}, "<M-l>", "<cmd>bn<cr>")
 
 vim.keymap.set("n", "<leader>nc", "<cmd>Telescope neoclip<cr>")
+
+vim.keymap.set('n', '<leader>dv', '<cmd>DiffviewOpen<cr>')
+vim.keymap.set('n', '<leader>dbh', '<cmd>DiffviewFileHistory<cr>')
+vim.keymap.set('n', '<leader>dh', '<cmd>DiffviewFileHistory %<cr>')
+vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<cr>')
 
