@@ -53,7 +53,6 @@ return require('packer').startup(function(use)
             require('neoclip').setup()
         end,
     }
-    use('cohama/lexima.vim')
     use {
         'nvim-lualine/lualine.nvim',
         requires = { 'nvim-tree/nvim-web-devicons', opt = true },
@@ -64,7 +63,10 @@ return require('packer').startup(function(use)
             }
         end,
     }
+
+    use("nvim-tree/nvim-web-devicons")
     use("sindrets/diffview.nvim")
+    use("cohama/lexima.vim")
 
 end)
 
