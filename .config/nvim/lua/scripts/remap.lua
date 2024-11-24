@@ -38,6 +38,7 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", {silent = true})
 vim.keymap.set("n", "<leader>w", "<cmd>:w<CR>", {silent = true})
 vim.keymap.set("n", "<leader>q", "<cmd>:q<CR>")
 vim.keymap.set("n", "<leader>so", "<cmd>:so<CR>")
+vim.keymap.set("n", "<leader>PS", "<cmd>:PackerSync<CR>")
 vim.keymap.set("n", "H", "^", {silent = true})
 vim.keymap.set("n", "L", "$", {silent = true})
 
