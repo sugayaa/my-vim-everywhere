@@ -50,3 +50,6 @@ vim.keymap.set('n', '<leader>dbh', '<cmd>DiffviewFileHistory<cr>')
 vim.keymap.set('n', '<leader>dh', '<cmd>DiffviewFileHistory %<cr>')
 vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<cr>')
 
+vim.keymap.set("n", "<leader>gp", ":Gitsigns preview_hunk_inline<CR>", {})
+vim.keymap.set("n", "<leader>gtb", ":Gitsigns toggle_current_line_blame<CR>", {})
+

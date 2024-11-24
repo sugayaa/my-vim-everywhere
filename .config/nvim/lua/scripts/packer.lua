@@ -66,7 +66,21 @@ return require('packer').startup(function(use)
 
     use("nvim-tree/nvim-web-devicons")
     use("sindrets/diffview.nvim")
-    use("cohama/lexima.vim")
+    use("jodama/lexima.vim")
+
+        use {
+        'tzachar/local-highlight.nvim',
+        config = function()
+            require('local-highlight').setup()
+        end,
+    }
+
+    use {
+        "lewis6991/gitsigns.nvim",
+        config = function()
+            require("gitsigns").setup()
+        end
+    }
 
 end)
 
