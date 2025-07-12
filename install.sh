@@ -26,20 +26,20 @@ cp .config/nvim/lua/scripts/init.lua $HOME/.config/nvim/init.lua
 git clone --depth 1 https://github.com/wbthomason/packer.nvim\
  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-cp .config/nvim/lua/scripts/packer.lua $HOME/.config/nvim/lua/scripts/packer.lua 
-cp .config/nvim/lua/scripts/remap.lua $HOME/.config/nvim/lua/scripts/remap.lua 
-cp .config/nvim/lua/scripts/set.lua $HOME/.config/nvim/lua/scripts/set.lua 
+cp config/nvim/lua/scripts/packer.lua $HOME/.config/nvim/lua/scripts/packer.lua 
+cp config/nvim/lua/scripts/remap.lua $HOME/.config/nvim/lua/scripts/remap.lua 
+cp config/nvim/lua/scripts/set.lua $HOME/.config/nvim/lua/scripts/set.lua 
 
 nvim --cmd "so $HOME/.config/nvim/lua/scripts/packer.lua" +PackerSync
 
 
 # configs
-cp .config/nvim/after/plugin/telescope.lua  $HOME/.config/nvim/after/plugin/telescope.lua 
-cp .config/nvim/after/plugin/treesitter.lua $HOME/.config/nvim/after/plugin/treesitter.lua 
-cp .config/nvim/after/plugin/harpoon.lua $HOME/.config/nvim/after/plugin/harpoon.lua 
-cp .config/nvim/after/plugin/undotree.lua $HOME/.config/nvim/after/plugin/undotree.lua 
-cp .config/nvim/after/plugin/fugitive.lua $HOME/.config/nvim/after/plugin/fugitive.lua 
-cp .config/nvim/after/plugin/lsp.lua $HOME/.config/nvim/after/plugin/lsp.lua 
+cp config/nvim/after/plugin/telescope.lua  $HOME/.config/nvim/after/plugin/telescope.lua 
+cp config/nvim/after/plugin/treesitter.lua $HOME/.config/nvim/after/plugin/treesitter.lua 
+cp config/nvim/after/plugin/harpoon.lua $HOME/.config/nvim/after/plugin/harpoon.lua 
+cp config/nvim/after/plugin/undotree.lua $HOME/.config/nvim/after/plugin/undotree.lua 
+cp config/nvim/after/plugin/fugitive.lua $HOME/.config/nvim/after/plugin/fugitive.lua 
+cp config/nvim/after/plugin/lsp.lua $HOME/.config/nvim/after/plugin/lsp.lua 
 
 # pacman -Sy
 # pacman -S gcc ripgrep
