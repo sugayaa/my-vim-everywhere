@@ -16,30 +16,28 @@ if [ -d $HOME/.local/share/nvim/site/pack/ ]; then
     exit
 fi
 
-mkdir -p $HOME/.config/nvim/lua/scripts/
-mkdir -p $HOME/.config/nvim/after/plugin/
+mkdir -p $HOME/.config/nvim/lua/config/lazy
 
-cp .config/nvim/init.lua $HOME/.config/nvim/init.lua
-cp .config/nvim/lua/scripts/init.lua $HOME/.config/nvim/init.lua
+cp config/nvim/init.lua $HOME/.config/nvim/init.lua
+cp config/nvim/lua/config/init.lua $HOME/.config/nvim/lua/config/init.lua
+cp config/nvim/lua/config/lazy/init.lua $HOME/.config/nvim/lua/config/lazy/init.lua
 
 
-git clone --depth 1 https://github.com/wbthomason/packer.nvim\
- ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
-cp config/nvim/lua/scripts/packer.lua $HOME/.config/nvim/lua/scripts/packer.lua 
-cp config/nvim/lua/scripts/remap.lua $HOME/.config/nvim/lua/scripts/remap.lua 
-cp config/nvim/lua/scripts/set.lua $HOME/.config/nvim/lua/scripts/set.lua 
-
-nvim --cmd "so $HOME/.config/nvim/lua/scripts/packer.lua" +PackerSync
-
+cp config/nvim/lua/config/lazy-init.lua $HOME/.config/nvim/lua/config/lazy-init.lua 
+cp config/nvim/lua/config/remap.lua $HOME/.config/nvim/lua/config/remap.lua 
+cp config/nvim/lua/config/set.lua $HOME/.config/nvim/lua/config/set.lua 
 
 # configs
-cp config/nvim/after/plugin/telescope.lua  $HOME/.config/nvim/after/plugin/telescope.lua 
-cp config/nvim/after/plugin/treesitter.lua $HOME/.config/nvim/after/plugin/treesitter.lua 
-cp config/nvim/after/plugin/harpoon.lua $HOME/.config/nvim/after/plugin/harpoon.lua 
-cp config/nvim/after/plugin/undotree.lua $HOME/.config/nvim/after/plugin/undotree.lua 
-cp config/nvim/after/plugin/fugitive.lua $HOME/.config/nvim/after/plugin/fugitive.lua 
-cp config/nvim/after/plugin/lsp.lua $HOME/.config/nvim/after/plugin/lsp.lua 
+cp config/nvim/lua/config/lazy/telescope.lua  $HOME/.config/nvim/lua/config/lazy/telescope.lua 
+cp config/nvim/lua/config/lazy/treesitter.lua $HOME/.config/nvim/lua/config/lazy/treesitter.lua 
+cp config/nvim/lua/config/lazy/fugitive.lua $HOME/.config/nvim/lua/config/lazy/fugitive.lua 
+cp config/nvim/lua/config/lazy/lualine.lua $HOME/.config/nvim/lua/config/lazy/lualine.lua 
+cp config/nvim/lua/config/lazy/lsp.lua $HOME/.config/nvim/lua/config/lazy/lsp.lua 
+cp config/nvim/lua/config/lazy/lexima.lua $HOME/.config/nvim/lua/config/lazy/lexima.lua 
+cp config/nvim/lua/config/lazy/gitsigns.lua $HOME/.config/nvim/lua/config/lazy/gitsigns.lua 
+cp config/nvim/lua/config/lazy/which-key.lua $HOME/.config/nvim/lua/config/lazy/which-key.lua 
+cp config/nvim/lua/config/lazy/colorscheme.lua $HOME/.config/nvim/lua/config/lazy/colorscheme.lua 
+cp config/nvim/lua/config/lazy/harpoon.lua $HOME/.config/nvim/lua/config/lazy/harpoon.lua 
 
 # pacman -Sy
 # pacman -S gcc ripgrep
