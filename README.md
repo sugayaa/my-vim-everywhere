@@ -9,29 +9,42 @@ lsp-zero seems to not be needed, as stated in [lsp-zero.nvim blog](https://lsp-z
 
 
 ## remaps
-```text
+```plaintext
+Basic
 _pv opens netrw (Explore)
+_w  saves buffer
+_q  closes buffer
+_so source buffer
 
-_pf opens telescope
+Telescope
+_pf search for files
 Ctrl+p opens telescope at git files
+_tr Telescope resume (opens Telescope with last search)
+_ps searches occurrence of text inputted
+_ss searches word under cursor
 
-_ps ripgreps occurrence of text
-
+Harpoon
 _a [harpoon] add mark to file
 Ctrl+e [harpoon] open quick menu
 Ctrl+[hjkl] [harpoon] quick switch between files
 
-J [normal] bring the line below to  the same line, keeping cursor in place
+Git
+_gs  opens fugitive
+_tgb toggle current line blame
 
+Fancy
+J [normal] bring the line below to  the same line, keeping cursor in place
 J [visual] moves code block up, plus auto indent
 K [visual] moves code block down, plus auto indent
+_s replace ocurrence of <word> under the whole file
 
+QOL
 <C-d> move half a page down keeping the cursor in the middle
 <C-u> move half a page up keeping the cursor in the middle
-
 _p pastes without copying the removed selection into the paste buffer
-_y yankees at system clipboard
+_y yankees at system clipboard (wsl included)
 _d deletes into the void register
-_s replace ocurrence of _word_ under the whole file
 
+Linter
+_sd show diagnostics of line under cursor
 ```
