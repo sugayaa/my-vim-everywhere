@@ -34,38 +34,18 @@ vim.opt.listchars = 'trail:-,nbsp:+,tab:▏  ,eol:↴,space:·'
 vim.opt.list = true
 
 -- clipboard
--- vim.opt.clipboard = "unnamedplus"
--- if vim.fn.has('wsl') == 1 then
---     vim.api.nvim_create_autocmd('TextYankPost', {
---         group = vim.api.nvim_create_augroup('Yank', { clear = true }),
---         callback = function()
---             vim.fn.system('clip.exe', vim.fn.getreg('#'))
---         end,
---     })
--- end
+if vim.fn.has('wsl') == 1 then
+    vim.g.clipboard = {
+        name = 'WslClipboard',
+        copy = {
+            ["+"] = 'clip.exe',
+            -- ["*"] = 'clip.exe',
+        },
+        paste = {
+            ["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+            -- ["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+        },
+        cache_enabled = 0,
+    }
+end
 -- clipboard end
---
--- vim.opt.clipboard = {
---        'name': 'WslClipboard',
---        'copy': {
---           '+': 'clip.exe',
---           '*': 'clip.exe',
---         },
---        'paste': {
---           '+': 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---           '*': 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
---        },
---        'cache_enabled': 0,
---     }
-vim.g.clipboard = {
-    name = 'WslClipboard',
-    copy = {
-        ["+"] = 'clip.exe',
-        -- ["*"] = 'clip.exe',
-    },
-    paste = {
-        ["+"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-        -- ["*"] = 'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-    },
-    cache_enabled = 0,
-}
