@@ -30,16 +30,16 @@ vim.keymap.set("v", "<leader>y", "\"+y")
 vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 -- invert d behaviour
-vim.keymap.set("n", "<leader>d", "d")
-vim.keymap.set("v", "<leader>d", "d")
-
-vim.keymap.set("n", "d", "\"_d")
-vim.keymap.set("v", "d", "\"_d")
+-- vim.keymap.set("n", "<leader>d", "d")
+-- vim.keymap.set("v", "<leader>d", "d")
+-- 
+-- vim.keymap.set("n", "d", "\"_d")
+-- vim.keymap.set("v", "d", "\"_d")
 -- d behaviour
 
 -- d behaviour
--- vim.keymap.set("n", "<leader>d", "\"_d")
--- vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set("n", "<leader>d", "\"_d")
+vim.keymap.set("v", "<leader>d", "\"_d")
 -- d behaviour
 
 vim.keymap.set("n", "Q", "<nop>")
@@ -70,3 +70,4 @@ vim.keymap.set('n', '<leader>dbh', '<cmd>DiffviewFileHistory<cr>')
 vim.keymap.set('n', '<leader>dh', '<cmd>DiffviewFileHistory %<cr>')
 vim.keymap.set('n', '<leader>dc', '<cmd>DiffviewClose<cr>')
 
+vim.keymap.set('n', '<leader>sd', vim.diagnostic.open_float, { desc = "Show current line diagnostics" })

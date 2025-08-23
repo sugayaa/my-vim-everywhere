@@ -125,5 +125,24 @@ return {
                 prefix = "",
             },
         })
+
+        -- local lspconfig = require('lspconfig')
+
+        -- lspconfig.pylsp.setup({
+        --     settings = {
+        --         pylsp = {
+        --             plugins = {
+        --                 pylint = {
+        --                     enabled = true,
+        --                     args = {
+        --                         '--check-protected-access-in-special-methods y',
+        --                     },
+        --                 },
+        --             },
+        --         },
+        --     },
+        -- })
+
+
     end
 }

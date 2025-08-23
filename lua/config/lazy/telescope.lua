@@ -9,6 +9,9 @@ return {
 
     config = function()
         require('telescope').setup({
+            defaults = {
+                path_display={ 'truncate' }
+            }, 
             pickers = {
                 find_files = {
                     theme = "ivy"
@@ -54,6 +57,7 @@ return {
 
         vim.keymap.set('n', '<leader>o', builtin.oldfiles, {})
 
+        -- TODO: open zellij config
         vim.keymap.set("n", "<leader>en", function()
             local config_opts = require('telescope.themes').get_ivy({
                 cwd = vim.fn.stdpath("config")
@@ -61,9 +65,14 @@ return {
             builtin.find_files(config_opts)
         end)
 
-        vim.keymap.set("n", "<leader>pr", builtin.resume, {})
+        vim.keymap.set("n", "<leader>ez", function()
+            local config_opts = require('telescope.themes').get_ivy({
+                cwd = {"~/.config/zellij"}
+            })
+            builtin.find_files(config_opts)
+        end)
 
-
+        vim.keymap.set("n", "<leader>tr", builtin.resume, {})
 
     end
 }
